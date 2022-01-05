@@ -1,7 +1,7 @@
-package com.example.springblog.security.jwt;
+package com.example.springbasicauth.security.jwt;
 
-import com.example.springblog.security.SecurityUtils;
-import com.example.springblog.security.UserPrincipal;
+import com.example.springbasicauth.security.SecurityUtils;
+import com.example.springbasicauth.security.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -26,7 +26,7 @@ public class JwtProvider implements IJwtProvider{
     @Value("${app.jwt.secret}")
     private String JWT_SECRET;
 
-    @Value("{app.jwt.expiration-in-minutes}")
+    @Value("${app.jwt.expiration-in-minutes}")
     private String JWT_EXPIRATION;
 
     @Override
@@ -36,7 +36,7 @@ public class JwtProvider implements IJwtProvider{
                 .collect(Collectors.joining(","));
 
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MINUTE, Integer.parseInt(JWT_EXPIRATION));
+        cal.add(Calendar.MINUTE, Integer.valueOf(JWT_EXPIRATION));
 
         return Jwts.builder()
                 .setSubject(userPrincipal.getUsername())
@@ -59,13 +59,13 @@ public class JwtProvider implements IJwtProvider{
         String username = claims.getSubject();
         Long userId = claims.get("userId", Long.class);
 
-        Set<GrantedAuthority> authoritySet = Arrays.stream(claims.get("roles").toString().split(","))
+        Set<GrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
                 .map(SecurityUtils::convertToAuthority)
                 .collect(Collectors.toSet());
 
         UserDetails userDetails = UserPrincipal.builder()
                 .username(username)
-                .authoritySet(authoritySet)
+                .authorities(authorities)
                 .id(userId)
                 .build();
 
@@ -73,7 +73,7 @@ public class JwtProvider implements IJwtProvider{
             return null;
         }
 
-        return new UsernamePasswordAuthenticationToken(userDetails, null, authoritySet);
+        return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
 
     }
 

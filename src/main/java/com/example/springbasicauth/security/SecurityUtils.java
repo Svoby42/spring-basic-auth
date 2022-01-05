@@ -1,4 +1,4 @@
-package com.example.springblog.security;
+package com.example.springbasicauth.security;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.util.StringUtils;

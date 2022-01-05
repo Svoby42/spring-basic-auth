@@ -1,8 +1,9 @@
-package com.example.springblog.services;
+package com.example.springbasicauth.services;
 
-import com.example.springblog.entities.Role;
-import com.example.springblog.entities.User;
-import com.example.springblog.repositories.UserRepository;
+import com.example.springbasicauth.entities.Role;
+import com.example.springbasicauth.entities.User;
+import com.example.springbasicauth.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,17 +14,15 @@ import java.util.Optional;
 @Service
 public class UserService implements  IUserService{
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user)
+    {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(Role.USER);
         user.setCreateTime(LocalDateTime.now());
@@ -32,13 +31,15 @@ public class UserService implements  IUserService{
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> findByUsername(String username)
+    {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    @Transactional
-    public void makeAdmin(String username) {
+    @Transactional //TransactionalRequired when executing an update/delete query.
+    public void makeAdmin(String username)
+    {
         userRepository.updateUserRole(username, Role.ADMIN);
     }
 }

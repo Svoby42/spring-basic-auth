@@ -1,7 +1,7 @@
-package com.example.springblog.security;
+package com.example.springbasicauth.security;
 
-import com.example.springblog.entities.Role;
-import com.example.springblog.entities.User;
+import com.example.springbasicauth.entities.Role;
+import com.example.springbasicauth.entities.User;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,51 +20,58 @@ public class UserPrincipal implements UserDetails {
     private String username;
     transient private String password;
     transient private User user;
-    private Set<GrantedAuthority> authoritySet;
+    private Set<GrantedAuthority> authorities;
 
-    public static UserPrincipal createSuperUser(){
+    public static UserPrincipal createSuperUser()
+    {
         Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(Role.SYSTEM_MANAGER.name()));
 
         return UserPrincipal.builder()
                 .id(-1L)
                 .username("system-administrator")
-                .authoritySet(authorities)
+                .authorities(authorities)
                 .build();
     }
 
-
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authoritySet;
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        return authorities;
     }
 
     @Override
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
     @Override
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
     @Override
-    public boolean isAccountNonExpired() {
+    public boolean isAccountNonExpired()
+    {
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked() {
+    public boolean isAccountNonLocked()
+    {
         return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
+    public boolean isCredentialsNonExpired()
+    {
         return true;
     }
 
     @Override
-    public boolean isEnabled() {
+    public boolean isEnabled()
+    {
         return true;
     }
 }

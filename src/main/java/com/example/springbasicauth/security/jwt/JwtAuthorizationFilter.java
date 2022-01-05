@@ -1,4 +1,4 @@
-package com.example.springblog.security.jwt;
+package com.example.springbasicauth.security.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

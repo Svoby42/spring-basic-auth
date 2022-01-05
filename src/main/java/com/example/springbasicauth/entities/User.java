@@ -1,4 +1,4 @@
-package com.example.springblog.entities;
+package com.example.springbasicauth.entities;
 
 import lombok.Data;
 import javax.persistence.*;
@@ -32,8 +32,5 @@ public class User {
 
     @Transient
     private String token;
-
-    @OneToMany(mappedBy = "user" ,cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    private List<Article> userArticleList;
 
 }

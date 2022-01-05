@@ -1,7 +1,7 @@
-package com.example.springblog.security;
+package com.example.springbasicauth.security;
 
-import com.example.springblog.entities.User;
-import com.example.springblog.services.IUserService;
+import com.example.springbasicauth.entities.User;
+import com.example.springbasicauth.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,18 +17,17 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private IUserService userService;
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
 
-        Set<GrantedAuthority> authoritySet = Set.of(SecurityUtils.convertToAuthority(user.getRole().name()));
+        Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(user.getRole().name()));
 
         return UserPrincipal.builder()
                 .user(user).id(user.getId())
                 .username(username)
                 .password(user.getPassword())
-                .authoritySet(authoritySet)
+                .authorities(authorities)
                 .build();
 
     }

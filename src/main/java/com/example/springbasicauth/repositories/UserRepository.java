@@ -1,7 +1,7 @@
-package com.example.springblog.repositories;
+package com.example.springbasicauth.repositories;
 
-import com.example.springblog.entities.Role;
-import com.example.springblog.entities.User;
+import com.example.springbasicauth.entities.Role;
+import com.example.springbasicauth.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

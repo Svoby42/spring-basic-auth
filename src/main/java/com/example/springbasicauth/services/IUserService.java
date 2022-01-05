@@ -1,6 +1,6 @@
-package com.example.springblog.services;
+package com.example.springbasicauth.services;
 
-import com.example.springblog.entities.User;
+import com.example.springbasicauth.entities.User;
 
 import java.util.Optional;
 

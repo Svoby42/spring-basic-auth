@@ -1,8 +1,8 @@
-package com.example.springblog.controllers;
+package com.example.springbasicauth.controllers;
 
-import com.example.springblog.entities.User;
-import com.example.springblog.services.IAuthenticationService;
-import com.example.springblog.services.IUserService;
+import com.example.springbasicauth.entities.User;
+import com.example.springbasicauth.services.IAuthenticationService;
+import com.example.springbasicauth.services.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

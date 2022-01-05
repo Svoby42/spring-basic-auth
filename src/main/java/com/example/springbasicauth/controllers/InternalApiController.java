@@ -1,6 +1,6 @@
-package com.example.springblog.controllers;
+package com.example.springbasicauth.controllers;
 
-import com.example.springblog.services.IUserService;
+import com.example.springbasicauth.services.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,8 +1,7 @@
-package com.example.springblog.security;
+package com.example.springbasicauth.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -16,7 +15,6 @@ import java.io.IOException;
 public class InternalApiAuthenticationFilter extends OncePerRequestFilter {
 
     private final String accessKey;
-
 
     public InternalApiAuthenticationFilter(String accessKey) {
         this.accessKey = accessKey;

@@ -1,6 +1,6 @@
-package com.example.springblog.security.jwt;
+package com.example.springbasicauth.security.jwt;
 
-import com.example.springblog.security.UserPrincipal;
+import com.example.springbasicauth.security.UserPrincipal;
 import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpServletRequest;
